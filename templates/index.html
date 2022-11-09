@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en" class="h-100">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Technochan</title>
+
+    <link href="../static/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="../static/css/style.css" rel="stylesheet">
+</head>
+<body class="d-flex flex-column h-100">
+
+<header>
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Technochan</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="index.html">New</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Hot</a>
+                    </li>
+                    <li>
+                        <a href="ask.html"><input class="btn btn-outline-success new-question-btn" type="button" value="Create new"></a>
+                    </li>
+                </ul>
+                <form class="d-flex search" role="search">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
+            </div>
+            <div class="header-user">
+                <div class="header-user-settings user"><a href="#">stepapopov</a></div>
+                <div class="avatar-header header-user-avatar"><a href="#"><img src="../static/img/avatar-1.jpg" alt=""></a></div>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<!-- Begin page content -->
+<main class="flex-shrink-0">
+
+    <div class="container">
+        <div class="page-title">
+            <h1>New questions</h1>
+        </div>
+        <div class="row">
+            <div class="col-8">
+                <div class="question">
+                    <div class="row">
+                        <div class="question-user col-2">
+                            <div class="avatar">
+                                <a href="#"><img src="../static/img/avatar-1.jpg" alt="" /></a>
+                            </div>
+                            <div class="user">
+                                <a href="#">stepapopov</a>
+                            </div>
+                            <div class="btn btn-outline-primary like">❤️<img alt="" src=""></div>
+                        </div>
+                        <div class="col-10">
+                            <h2 class="question-title"><a href="question.html">Question 1</a></h2>
+                            <div class="question-text">
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor ea, expedita hic magnam officia qui quod sed soluta suscipit vitae.
+                            </div>
+                            <div class="question-ans-likes row">
+                                <div class="col-3 question-answers">
+                                    <a href="question.html">2 answers</a>
+                                </div>
+                                <div class="col-9 question-tags">
+                                    Tags: 
+                                    <div class="tag"><a href="#">lol</a></div>
+                                    <div class="tag"><a href="#">kek</a></div>
+                                    <div class="tag"><a href="#">haha</a></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <div class="row">
+                        <div class="col-2">
+                            <div class="avatar">
+                                <a href="#"><img src="../static/img/avatar-2.jpg" alt="" /></a>
+                            </div>
+                            <div class="user">
+                                <a href="#">vasyapupkin</a>
+                            </div>
+                            <div class="btn btn-outline-primary like">❤️<img alt="" src=""></div>
+                        </div>
+                        <div class="col-10">
+                            <h2 class="question-title"><a href="question.html">Question 2</a></h2>
+                            <div class="question-text">
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor ea, expedita hic magnam officia qui quod sed soluta suscipit vitae.
+                            </div>
+                            <div class="question-ans-likes row">
+                                <div class="col-3 question-answers">
+                                    <a href="question.html">1 answers</a>
+                                </div>
+                                <div class="col-9 question-tags">
+                                    Tags: 
+                                    <div class="tag"><a href="#">c++</a></div>
+                                    <div class="tag"><a href="#">python</a></div>
+                                    <div class="tag"><a href="#">golang</a></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <div class="row">
+                        <div class="col-2">
+                            <div class="avatar">
+                                <a href="#"><img src="../static/img/avatar-3.jpg" alt="" /></a>
+                            </div>
+                            <div class="user">
+                                <a href="#">petyavaskin</a>
+                            </div>
+                            <div class="btn btn-outline-primary like">❤️<img alt="" src=""></div>
+                        </div>
+                        <div class="col-10">
+                            <h2 class="question-title"><a href="question.html">Question 3</a></h2>
+                            <div class="question-text">
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor ea, expedita hic magnam officia qui quod sed soluta suscipit vitae.
+                            </div>
+                            <div class="question-ans-likes row">
+                                <div class="col-3 question-answers">
+                                    <a href="question.html">0 answers</a>
+                                </div>
+                                <div class="col-9 question-tags">
+                                    Tags: 
+                                    <div class="tag"><a href="#">nice</a></div>
+                                    <div class="tag"><a href="#">tag</a></div>
+                                    <div class="tag"><a href="#">cool</a></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <ul class="pagination">
+                    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                </ul>
+            </div>
+            <div class="col-4 sidebar">
+                <div class="sidebar-section">
+                    <h3>Popular tags:</h3>
+                    <div class="sidebar-tags">
+                        <div class="tag"><a href="#">haha</a></div>
+                        <div class="tag"><a href="#">kek</a></div>
+                        <div class="tag"><a href="#">c++</a></div>
+                        <div class="tag"><a href="#">python</a></div>
+                        <div class="tag"><a href="#">golang</a></div>
+                        <div class="tag"><a href="#">lol</a></div>
+                        <div class="tag"><a href="#">nice</a></div>
+                    </div>
+                </div>
+                <div class="sidebar-section">
+                    <h3>Popular users:</h3>
+                    <div class="sidebar-users">
+                        <div class="user"><a href="#">stepapopov</a></div>
+                        <div class="user"><a href="#">vasyapupkin</a></div>
+                        <div class="user"><a href="#">petyavaskin</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</main>
+
+<footer class="footer mt-auto py-3 bg-dark">
+    <div class="container">
+        <span class="text-muted">Footer</span>
+    </div>
+</footer>
+
+</body>
+</html>
