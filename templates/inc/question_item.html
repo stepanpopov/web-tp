@@ -11,7 +11,7 @@
             </div>
             <div class="btn btn-outline-danger like">❤️<img alt="" src=""></div>
         </div>
-        <div class="col-10">
+        <div class="question-title-text-ans-likes col-10">
             <h2 class="question-title"><a href={% url 'question' question_id=question.id %}> {{question.title}} </a></h2>
             <div class="question-text">
                 {% if page == 'index' %}
@@ -22,11 +22,11 @@
             </div>
             <div class="question-ans-likes row">
                 {% if page == 'index' %}
-                <div class="col-3 question-answers">
+                <div class="col-4 question-answers">
                     <a href={% url 'question' question_id=question.id %}>{{question.answers_num}} answer{% if question.answers_num != 1 %}s{% endif %}</a>
                 </div>
                 {% endif %}
-                <div class="col-9 question-tags">
+                <div class="col-8 question-tags">
                     Tags: 
                     {% for tag in question.tags %}
                         <div class="tag"><a href={% url 'tag' tag_title=tag %}>{{tag}}</a></div>

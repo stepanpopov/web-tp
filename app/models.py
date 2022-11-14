@@ -5,14 +5,14 @@ QUESTIONS = [
         'id' : id,
         'answers_num' : id,
         'tags': ['meaning_of_life', 'c++'],
-        'text': 'Alone ' * id * id * id * id,
+        'text': 'Lorem ' * id * id * id * id,
         'title': 'question {}'.format(id),
         'user': 'stepapopov',
         'rep' : id
     } for id in range(1, 6)
 ]
 
-HOT_QUESTIONS = sorted(QUESTIONS, key=lambda x: x['rep'], reverse=True)
+HOT_QUESTIONS = sorted(QUESTIONS, key=lambda x: x['answers_num'], reverse=True)
 
 ANSWERS = { 
     question['id'] : [ 
@@ -46,12 +46,14 @@ POPULAR_TAGS = sorted(TAGS, key=lambda x: x['question_num'], reverse=True)[:20]
 USERS = [
     {
         'name' : 'stepanpopov',
-        'question_num' : 6 
+        'question_num' : 6,
+        'rep' : 10000 
     },
     {
         'name' : 'yarikTri',
-        'question_num' : 0
+        'question_num' : 0,
+        'rep' : 500
     }
 ]
 
-POPULAR_USERS = sorted(USERS, key=lambda x: x['question_num'], reverse=True)[:10]
+POPULAR_USERS = sorted(USERS, key=lambda x: x['rep'], reverse=True)[:10]

@@ -6,7 +6,8 @@ def index(request):
     context = { 'questions': models.QUESTIONS,
                 'title': 'New questions',
                 'popular_tags': models.POPULAR_TAGS,
-                'popular_users': models.POPULAR_USERS 
+                'popular_users': models.POPULAR_USERS,
+                'autentificated': True 
     }
 
     return render(request, 'index.html', context=context)
@@ -22,7 +23,8 @@ def tag(request, tag_title : str):
     context = { 'questions': questions,
                 'title': tag_title,
                 'popular_tags': models.POPULAR_TAGS,
-                'popular_users': models.POPULAR_USERS 
+                'popular_users': models.POPULAR_USERS,
+                'autentificated': True 
     }
 
     return render(request, 'index.html', context=context)
@@ -31,7 +33,8 @@ def hot(request):
     context = { 'questions': models.HOT_QUESTIONS,
                 'title': 'HOT questions',
                 'popular_tags': models.POPULAR_TAGS,
-                'popular_users': models.POPULAR_USERS 
+                'popular_users': models.POPULAR_USERS,
+                'autentificated': True 
     }
 
     return render(request, 'index.html', context=context)
@@ -50,7 +53,8 @@ def question(request, question_id : int):
                 'question': question_needed,
                 'answers': models.ANSWERS[question_id],
                 'popular_tags': models.POPULAR_TAGS,
-                'popular_users': models.POPULAR_USERS 
+                'popular_users': models.POPULAR_USERS,
+                'autentificated': True 
     }
 
     return render(request, 'question.html' , context=context)
@@ -58,7 +62,8 @@ def question(request, question_id : int):
 def ask(request):
     context = { 'title': 'New question',
                 'popular_tags': models.POPULAR_TAGS,
-                'popular_users': models.POPULAR_USERS 
+                'popular_users': models.POPULAR_USERS,
+                'autentificated': True 
     }
 
     return render(request, 'ask.html', context=context)
