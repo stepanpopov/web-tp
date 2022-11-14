@@ -1,0 +1,18 @@
+<div class="col-4 sidebar">
+    <div class="sidebar-section">
+        <h3>Popular tags:</h3>
+        <div class="sidebar-tags">
+            {% for tag in popular_tags %}
+                <div class="tag"><a href={% url 'tag' tag_title=tag.tag_title %}>{{tag.tag_title}}</a></div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="sidebar-section">
+        <h3>Popular users:</h3>
+        <div class="sidebar-users">
+            {% for user in popular_users %}
+                <div class="user"><a href="#">{{user.name}}</a></div>
+            {% endfor %}
+        </div>
+    </div>
+</div>

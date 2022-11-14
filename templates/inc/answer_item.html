@@ -1,0 +1,25 @@
+{% load static %}
+
+<div class="answer">
+    <div class="row">
+        <div class="answer-user col-2">
+            <div class="avatar">
+                <a href="#"><img src="{% static 'img/avatar-2.jpg' %}" alt="" /></a>
+            </div>
+            <div class="user">
+                <a href="#">{{ answer.user }}</a>
+            </div>
+            <div class="btn btn-outline-danger like">❤️<img alt="" src=""></div>
+        </div>
+        <div class="col-10">
+            <h2 class="question-title">{{ answer.title }}</h2>
+            <div class="question-text">
+                {{ answer.text }}
+            </div>
+            <div class="right-ans">
+                <input type="checkbox" class="form-check-label" id="rightAns">
+                <label class="form-check-label" for="rightAns">Right answer</label>
+            </div>
+        </div>
+    </div>
+</div>

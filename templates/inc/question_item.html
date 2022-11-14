@@ -1,0 +1,38 @@
+{% load static %}
+
+<div class="question">
+    <div class="row">
+        <div class="question-user col-2">
+            <div class="avatar">
+                <a href="#"><img src="{% static 'img/avatar-1.jpg' %}" alt="" /></a>
+            </div>
+            <div class="user">
+                <a href="#">{{question.user|truncatewords:'10'}}</a>
+            </div>
+            <div class="btn btn-outline-danger like">❤️<img alt="" src=""></div>
+        </div>
+        <div class="col-10">
+            <h2 class="question-title"><a href={% url 'question' question_id=question.id %}> {{question.title}} </a></h2>
+            <div class="question-text">
+                {% if page == 'index' %}
+                    {{question.text|truncatewords:'30'}}
+                {% else %}
+                    {{question.text}}
+                {% endif %}
+            </div>
+            <div class="question-ans-likes row">
+                {% if page == 'index' %}
+                <div class="col-3 question-answers">
+                    <a href={% url 'question' question_id=question.id %}>{{question.answers_num}} answer{% if question.answers_num != 1 %}s{% endif %}</a>
+                </div>
+                {% endif %}
+                <div class="col-9 question-tags">
+                    Tags: 
+                    {% for tag in question.tags %}
+                        <div class="tag"><a href={% url 'tag' tag_title=tag %}>{{tag}}</a></div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
