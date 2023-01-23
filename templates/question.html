@@ -14,7 +14,7 @@
     <button type="submit" class="btn btn-primary form-btn">Answer</button>
 </form>
 
-<h3>{{question.answers_num}} answer{% if question.answers_num != 1 %}s{% endif %}</h3>
+<h3>{{question.answers.count}} answer{% if question.answers.count != 1 %}s{% endif %}</h3>
 
 {% for answer in answers %}
     {% include 'inc/answer_item.html' %}

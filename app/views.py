@@ -1,85 +1,82 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseNotFound
 from app import models
 
+
+def context_for_sidebar(context):
+    context['popular_tags'] = models.Tag.manager.get_top10()
+    context['popular_users'] = models.Profile.manager.get_top5()
+
+
 def index(request):
-    context = { 'questions': models.QUESTIONS,
+    context = { 'questions': models.Question.manager.get_newest(),
                 'title': 'New questions',
-                'popular_tags': models.POPULAR_TAGS,
-                'popular_users': models.POPULAR_USERS,
                 'autentificated': True 
     }
+    context_for_sidebar(context)
 
     return render(request, 'index.html', context=context)
 
+
 def tag(request, tag_title : str):
-    questions = []
-    for question in models.QUESTIONS:
-        if tag_title in question['tags']:
-            questions.append(question)
-    if len(questions) == 0:
-        return HttpResponseNotFound("404")
+    questions = models.Question.manager.get_by_tag_name(tag_title)
+    if questions == None:
+        return HttpResponseNotFound(f"Такого тега не существует")
+    elif questions.count() == 0:
+        return HttpResponseNotFound(f"Нет вопросов для этого тега")
+    
 
     context = { 'questions': questions,
                 'title': tag_title,
-                'popular_tags': models.POPULAR_TAGS,
-                'popular_users': models.POPULAR_USERS,
                 'autentificated': True 
     }
+    context_for_sidebar(context)
 
     return render(request, 'index.html', context=context)
+
 
 def hot(request):
-    context = { 'questions': models.HOT_QUESTIONS,
+    context = { 'questions': models.Question.manager.get_top(),
                 'title': 'HOT questions',
-                'popular_tags': models.POPULAR_TAGS,
-                'popular_users': models.POPULAR_USERS,
                 'autentificated': True 
     }
+    context_for_sidebar(context)
 
     return render(request, 'index.html', context=context)
 
+
 def question(request, question_id : int):
-    question_needed = None
-    for question in models.QUESTIONS:
-        if question['id'] == question_id:
-            question_needed = question
+    question = get_object_or_404(models.Question, id=question_id)
 
-    if question_needed == None:
-        return HttpResponseNotFound("404")
+    if question == None:
+        return HttpResponseNotFound("Нет такого вопроса")
 
-
-    context = { 'title': 'Question {}'.format(question_id),
-                'question': question_needed,
-                'answers': models.ANSWERS[question_id],
-                'popular_tags': models.POPULAR_TAGS,
-                'popular_users': models.POPULAR_USERS,
+    context = { 'title': question.title,
+                'question': question,
+                'answers': models.Answer.manager.get_by_question(question),
                 'autentificated': True 
     }
+    context_for_sidebar(context)
 
     return render(request, 'question.html' , context=context)
 
+
 def ask(request):
     context = { 'title': 'New question',
-                'popular_tags': models.POPULAR_TAGS,
-                'popular_users': models.POPULAR_USERS,
                 'autentificated': True 
     }
+    context_for_sidebar(context)
 
     return render(request, 'ask.html', context=context)
 
 def signup(request):
-    context = { 'title': 'Sign up',
-                'popular_tags': models.POPULAR_TAGS,
-                'popular_users': models.POPULAR_USERS 
-    }
+    context = { 'title': 'Sign up' }
+    context_for_sidebar(context)
 
     return render(request, 'signup.html', context=context)
 
 def login(request):
-    context = { 'title': 'Sign in',
-                'popular_tags': models.POPULAR_TAGS,
-                'popular_users': models.POPULAR_USERS 
-    }
+    context = { 'title': 'Sign in' }
+    context_for_sidebar(context)
 
     return render(request, 'login.html', context=context)

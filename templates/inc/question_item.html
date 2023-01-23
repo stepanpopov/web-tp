@@ -1,15 +1,29 @@
 {% load static %}
+{% load mathfilters %}
 
 <div class="question">
     <div class="row">
         <div class="question-user col-2">
             <div class="avatar">
-                <a href="#"><img src="{% static 'img/avatar-1.jpg' %}" alt="" /></a>
+                <a href="#"><img src="
+                    {% if question.profile.avatar %}
+                        {{question.profile.avatar.url}}
+                    {% else %}
+                        {% static 'img/avatar-1.jpg' %}
+                    {% endif %}
+                    " alt="" /></a>
             </div>
             <div class="user">
-                <a href="#">{{question.user|truncatewords:'10'}}</a>
+                <a href="#">{{question.profile.user.username|truncatewords:'10'}}</a>
             </div>
-            <div class="btn btn-outline-danger like">❤️<img alt="" src=""></div>
+            <div class="btn btn-outline-danger like">❤️
+                <h10>   {% if question.rep > 1000 %} 
+                            {{question.rep|intdiv:1000}} k
+                        {% else %}
+                            {{question.rep}}
+                        {% endif %}
+                </h10>
+            </div>
         </div>
         <div class="question-title-text-ans-likes col-10">
             <h2 class="question-title"><a href={% url 'question' question_id=question.id %}> {{question.title}} </a></h2>
@@ -20,16 +34,16 @@
                     {{question.text}}
                 {% endif %}
             </div>
-            <div class="question-ans-likes row">
+            <div class="question-ans-likes row col-10">
                 {% if page == 'index' %}
                 <div class="col-4 question-answers">
-                    <a href={% url 'question' question_id=question.id %}>{{question.answers_num}} answer{% if question.answers_num != 1 %}s{% endif %}</a>
+                    <a href={% url 'question' question_id=question.id %}>{{question.answers.count}} answer{% if question.answers.count != 1 %}s{% endif %}</a>
                 </div>
                 {% endif %}
                 <div class="col-8 question-tags">
                     Tags: 
-                    {% for tag in question.tags %}
-                        <div class="tag"><a href={% url 'tag' tag_title=tag %}>{{tag}}</a></div>
+                    {% for tag in question.tags.all %}
+                        <div class="tag"><a href={% url 'tag' tag_title=tag.name %}>{{tag.name}}</a></div>
                     {% endfor %}
                 </div>
             </div>
