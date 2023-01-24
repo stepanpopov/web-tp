@@ -1,6 +1,9 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponseNotFound
 from django.core.paginator import Paginator
+from django.contrib import auth
+from django.urls import reverse
+from django.core.exceptions import ValidationError
 from app import models
 from app import forms
 
@@ -98,25 +101,57 @@ def question(request, question_id : int, page_num = 1):
 
 
 def ask(request):
-    context = { 'title': 'New question',
-                # 'autentificated': True 
-    }
+    if request.method == 'GET':
+        question_form = forms.QuestionForm()
+
+    if request.method == 'POST':
+        question_form = forms.QuestionForm(request.POST)
+        if question_form.is_valid():
+            q_id = question_form.save(request.user.profile.id)
+            return redirect('question', q_id)
+
+    context = { 'form': question_form }
     context_for_sidebar(context)
 
-    return render(request, 'ask.html', context=context)
+    return render(request, "ask.html", context=context)
 
 def signup(request):
-    context = { 'title': 'Sign up' }
+    if request.method == 'GET':
+        user_form = forms.RegistrationForm()
+    
+    if request.method == 'POST':
+        user_form = forms.RegistrationForm(request.POST, request.FILES)
+        if user_form.is_valid():
+            user_form.save()
+
+            user = auth.authenticate(request=request, **user_form.cleaned_data)
+            if user:
+                auth.login(request, user)
+                return redirect(reverse('index'))
+            else:
+                user_form.add_error(field=None, error="Error while creating user")
+    
+    context = { 'form': user_form }
     context_for_sidebar(context)
 
-    return render(request, 'signup.html', context=context)
+    return render(request, "signup.html", context=context)
 
 def login(request):
     if request.method == 'GET':
         user_form = forms.LoginForm()
 
-
-    context = { 'title': 'Sign in' }
+    if request.method == 'POST':
+        user_form = forms.LoginForm(request.POST)
+        if user_form.is_valid():
+            user = auth.authenticate(request=request, **user_form.cleaned_data)
+            if user:
+                auth.login(request, user)
+                return redirect(reverse('index'))
+            else:
+                user_form.add_error(field=None, error="Wrong username or password")
+    
+    context = { 'form': user_form }
     context_for_sidebar(context)
 
-    return render(request, 'login.html', context=context)
+    return render(request, "login.html", context=context)
+

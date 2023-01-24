@@ -23,7 +23,7 @@
                 <button class="btn btn-outline-success" type="submit">Search</button>
             </form>
         </div>
-        {% if autentificated == True %}
+        {% if user.is_authenticated == True %}
         <div class="header-user">
             <div class="header-user-settings user"><a href="#">stepapopov</a></div>
             <div class="avatar-header header-user-avatar"><a href="#"><img src="{% static 'img/avatar-1.jpg'%}" alt=""></a></div>

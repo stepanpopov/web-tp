@@ -1,57 +1,63 @@
 {% extends 'inc/base.html' %}
 
 {% block content %}
-  
-  <div class="non-field-error failure">
-    {{ form.non_field_errors }}
-  </div>
-  
-  <form action="{% url "signup" %}" method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-  
-    <div class="form-group form-group-flex">
-      <label class="reg-form-label" for="username">Username:</label>
-      <input name="username" class="form-control reg-form" id="username" placeholder="username">
-      <div class="field-error failure"> {{form.errors.username}} </div>
-    </div>
     
-    <div class="form-group form-group-flex">
-      <label class="reg-form-label" for="email">Email:</label>
-      <input name="email" type="email" class="form-control reg-form" value="{{email}}" id="email" placeholder="email">
-      <div class="field-error failure"> {{form.errors.email}} </div>
+    <div class="row">
+        <div class="col-11 page-header">
+            <h1>Sign up</h1>
+        </div>
     </div>
-  
-    <div class="form-group form-group-flex">
-      <label class="reg-form-label" for="firstName">First name:</label>
-      <input name="first_name" class="form-control reg-form" id="firstName" placeholder="first name">
-      <div class="field-error failure"> {{form.errors.first_name}} </div>
+
+    <div class="non-field-error failure">
+    {{ form.non_field_errors }}
     </div>
-  
+
+    <form action="{% url "signup" %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+
     <div class="form-group form-group-flex">
-      <label class="reg-form-label" for="lastName">Last name:</label>
-      <input name="last_name" class="form-control reg-form" id="lastName" placeholder="last name">
-      <div class="field-error failure"> {{form.errors.last_name}} </div>
+        <label class="reg-form-label" for="username">Username:</label>
+        <input name="username" class="form-control reg-form" id="username" placeholder="username">
+        <div class="field-error failure"> {{form.errors.username}} </div>
     </div>
-  
+
     <div class="form-group form-group-flex">
-      <label class="reg-form-label" for="password">Password:</label>
-      <input name="password" type="password" class="form-control reg-form" id="password" placeholder="password">
-      <div class="field-error failure"> {{form.errors.password}} </div>
+        <label class="reg-form-label" for="email">Email:</label>
+        <input name="email" type="email" class="form-control reg-form" value="{{email}}" id="email" placeholder="email">
+        <div class="field-error failure"> {{form.errors.email}} </div>
     </div>
-  
+
     <div class="form-group form-group-flex">
-      <label class="reg-form-label" for="passwordCheck">Repeat password:</label>
-      <input name="password_check" type="password" class="form-control reg-form" id="passwordCheck" placeholder="password">
-      <div class="field-error failure"> {{form.errors.password_check}} </div>
+        <label class="reg-form-label" for="firstName">First name:</label>
+        <input name="first_name" class="form-control reg-form" id="firstName" placeholder="first name">
+        <div class="field-error failure"> {{form.errors.first_name}} </div>
     </div>
-  
+
     <div class="form-group form-group-flex">
-      <label class="reg-form-label" for="avatar">Avatar:</label>
-      <input name="avatar" type="file" class="form-control reg-form" id="avatar">
-      <div class="field-error failure"> {{form.errors.avatar}} </div>
+        <label class="reg-form-label" for="lastName">Last name:</label>
+        <input name="last_name" class="form-control reg-form" id="lastName" placeholder="last name">
+        <div class="field-error failure"> {{form.errors.last_name}} </div>
     </div>
-  
+
+    <div class="form-group form-group-flex">
+        <label class="reg-form-label" for="password">Password:</label>
+        <input name="password" type="password" class="form-control reg-form" id="password" placeholder="password">
+        <div class="field-error failure"> {{form.errors.password}} </div>
+    </div>
+
+    <div class="form-group form-group-flex">
+        <label class="reg-form-label" for="passwordCheck">Repeat password:</label>
+        <input name="password_check" type="password" class="form-control reg-form" id="passwordCheck" placeholder="password">
+        <div class="field-error failure"> {{form.errors.password_check}} </div>
+    </div>
+
+    <div class="form-group form-group-flex">
+        <label class="reg-form-label" for="avatar">Avatar:</label>
+        <input name="avatar" type="file" class="form-control reg-form" id="avatar">
+        <div class="field-error failure"> {{form.errors.avatar}} </div>
+    </div>
+
     <button class="btn btn-dark submit-button sbmt-reg-btn">Sign up</button>
-  </form>
+    </form>
 
 {% endblock %}
