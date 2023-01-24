@@ -76,8 +76,16 @@ WSGI_APPLICATION = 'technochan.wsgi.application'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 
-DATABASES = {  
-    'default': {  
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'technochan',
+        'USER': 'stepan',
+        'PASSWORD': '1234',
+        'HOST': 'localhost',
+        'PORT': '',
+    },  
+    'mysql': {  
         'ENGINE': 'django.db.backends.mysql',  
         'NAME': 'technochan',  
         'USER': 'stepan',  
@@ -139,5 +147,5 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = BASE_DIR / 'media'
 MEDIA_URL = '/media/'

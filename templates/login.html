@@ -1,21 +1,27 @@
 {% extends 'inc/base.html' %}
 
 {% block content %}
-
-<form>
-    <div class="red">
-        Wrong login or password!
+  
+  <div class="non-field-error failure">
+    {{ form.non_field_errors }}
+  </div>
+  
+  <form action="{% url "login" %}" method="post">
+    {% csrf_token %}
+  
+    <div class="form-group form-group-flex">
+      <label class="reg-form-label" for="username">Username:</label>
+      <input name="username" class="form-control reg-form" id="username" placeholder="username">
+      <div class="field-error failure"> {{form.errors.username}} </div>
     </div>
-    <div class="login-form form-group form-group-flex">
-        <label class="col-4 form-label" for="userLogin">Login:</label>
-        <input class="form-control" id="userLogin" placeholder="login">
+  
+    <div class="form-group form-group-flex">
+      <label class="reg-form-label" for="password">Password:</label>
+      <input name="password" type="password" class="form-control reg-form" id="password" placeholder="password">
+      <div class="field-error failure"> {{form.errors.password}} </div>
     </div>
-    <div class="login-form form-group form-group-flex">
-        <label class="col-4 form-label" for="userPassword">Password:</label>
-        <input type="password" class="form-control" id="userPassword" placeholder="password">
-    </div>
-
-    <button type="submit" class="btn form-btn btn-primary">Sign in</button>
-</form>
+  
+    <button class="btn btn-dark submit-button sbmt-reg-btn">Log in</button>
+  </form>
 
 {% endblock %}

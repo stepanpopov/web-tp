@@ -20,7 +20,11 @@
     {% include 'inc/answer_item.html' %}
 {% endfor %}
 
-{% include 'inc/paginator.html' %}
+<!--Pagination block begin-->
+{% with page_url="question_page" var=question.id not_first_page=answers.has_previous not_last_page=answers.has_next %}
+    {% include "inc/paginator.html" %}
+{% endwith %}
+<!--Pagination block end-->
 
 {% endblock %}
 

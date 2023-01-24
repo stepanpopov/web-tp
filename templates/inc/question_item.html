@@ -5,13 +5,7 @@
     <div class="row">
         <div class="question-user col-2">
             <div class="avatar">
-                <a href="#"><img src="
-                    {% if question.profile.avatar %}
-                        {{question.profile.avatar.url}}
-                    {% else %}
-                        {% static 'img/avatar-1.jpg' %}
-                    {% endif %}
-                    " alt="" /></a>
+                <a href="#"><img src="{% if question.profile.avatar %} {{question.profile.avatar.url}} {% else %} {% static 'img/avatar-1.jpg' %} {% endif %}" alt="" /></a>
             </div>
             <div class="user">
                 <a href="#">{{question.profile.user.username|truncatewords:'10'}}</a>

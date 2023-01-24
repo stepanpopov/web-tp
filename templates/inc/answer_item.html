@@ -5,7 +5,11 @@
     <div class="row">
         <div class="answer-user col-2">
             <div class="avatar">
-                <a href="#"><img src="{% static 'img/avatar-2.jpg' %}" alt="" /></a>
+                <a href="#"><img src="{% if answer.profile.avatar %}
+                    {{answer.profile.avatar.url}}
+                  {% else %}
+                    {% static 'img/avatar-2.jpg' %}
+                  {% endif %}" alt="" /></a>
             </div>
             <div class="user">
                 <a href="#">{{ answer.profile.user.username }}</a>

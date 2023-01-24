@@ -8,6 +8,16 @@
     {% include 'inc/question_item.html' with page='index' %}
 {% endfor %}
 
-{% include 'inc/paginator.html' %}
+<!--Pagination block begin-->
+{% if page_url == "index_page" or page_url == "hot_page" %}
+    {% with not_first_page=questions.has_previous not_last_page=questions.has_next %}
+        {% include 'inc/paginator.html' %}
+    {% endwith %}
+{% elif page_url == "tag_page" %}
+    {% with var=tag.name not_first_page=questions.has_previous not_last_page=questions.has_next %}
+        {% include 'inc/paginator.html' %}
+    {% endwith %}
+{% endif %}
+<!--Pagination block end-->
 
 {% endblock %}
