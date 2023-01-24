@@ -23,7 +23,7 @@ class RegistrationForm(forms.Form):
         password_1 = self.cleaned_data.get('password')
         password_2 = self.cleaned_data.get('password_check')
 
-        if models.Profile.objects.get_user_by_username(username):
+        if models.Profile.manager.get_user_by_username(username):
             self.add_error('username', IntegrityError("User already exists"))
 
         if password_1 != password_2:
@@ -57,10 +57,23 @@ class QuestionForm(forms.Form):
 
     def save(self, profile_id) -> int:
         super().clean()
+        print(self.cleaned_data['tags'])
+
+        tags_names = self.cleaned_data['tags'].split()
+        tags = []
+        for tag_name in tags_names:
+            if models.Tag.manager.filter(name=tag_name).exists():
+                tags.append(models.Tag.manager.get(name=tag_name))
+            else:
+                new_tag = models.Tag(name=tag_name)
+                new_tag.save()
+                tags.append(new_tag)
+
         new_question = models.Question(profile_id=profile_id,
                                         title=self.cleaned_data['title'],
                                         text=self.cleaned_data['text'])
         new_question.save()
+        new_question.tags.set(tags)
 
         return new_question.id
 
@@ -70,7 +83,7 @@ class AnswerForm(forms.Form):
     def save(self, profile_id, q_id) -> id:
         super().clean()
         new_answer = models.Answer(profile_id=profile_id,
-                                    related_question_id=q_id,
+                                    question_id=q_id,
                                     text=self.cleaned_data['text'])
         new_answer.save()
 

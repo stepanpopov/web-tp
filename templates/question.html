@@ -6,13 +6,17 @@
 
 {% include 'inc/question_item.html' with page='question' %}
 
-<form>
-    <div class="form-group">
-        <label for="answer">Your answer:</label>
-        <textarea type="" class="form-control form-answer" id="answer" placeholder="Helpful answer" rows="3"></textarea>
+{% if user.is_authenticated %}
+<form class="new-answer" action="{% url "question" question.id %}" method="post">
+    {% csrf_token %}
+
+    <div class="form-group form-group-flex">
+      <label class="question-form-label label-answer" for="questionText">New answer:</label>
+      <textarea name="text" class="form-control question-form" id="questionText" placeholder="Answer him!!!" rows="3"></textarea> 
     </div>
-    <button type="submit" class="btn btn-primary form-btn">Answer</button>
-</form>
+    <button class="btn btn-primary">Answer</button>
+  </form>
+{% endif %}
 
 <h3>{{question.answers.count}} answer{% if question.answers.count != 1 %}s{% endif %}</h3>
 

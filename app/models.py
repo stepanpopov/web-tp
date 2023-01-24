@@ -2,11 +2,19 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.db.models import Count
 from django.db.models import F
+from django.db.models import ObjectDoesNotExist
 
 
 class ProfileManager(models.Manager):
     def get_top5(self):
         return self.order_by('-rep')[:5]
+    def get_user_by_username(self, username):
+        try:
+            user = User.objects.get(username=username)
+        except ObjectDoesNotExist:
+            user = None
+
+        return user
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
@@ -20,8 +28,8 @@ class Profile(models.Model):
 
 
 class TagManager(models.Manager):
-    def get_top10(self):
-        return self.annotate(count=Count('questions')).order_by('-count')[:10]
+    def get_top8(self):
+        return self.annotate(count=Count('questions')).order_by('-count')[:8]
 
     def get_by_question(self, question):
         return self.filter(questions=question)

@@ -1,9 +1,11 @@
 from django.shortcuts import render, get_object_or_404, redirect
+from django.http import HttpRequest
 from django.http import HttpResponseNotFound
 from django.core.paginator import Paginator
 from django.contrib import auth
 from django.urls import reverse
 from django.core.exceptions import ValidationError
+from django.contrib.auth.decorators import login_required
 from app import models
 from app import forms
 
@@ -18,7 +20,7 @@ def pagination(objects, page):
 
 
 def context_for_sidebar(context):
-    context['popular_tags'] = models.Tag.manager.get_top10()
+    context['popular_tags'] = models.Tag.manager.get_top8()
     context['popular_users'] = models.Profile.manager.get_top5()
 
 
@@ -84,6 +86,16 @@ def question(request, question_id : int, page_num = 1):
     if question == None:
         return HttpResponseNotFound("Нет такого вопроса")
 
+    if request.method == 'POST':
+        answer_form = forms.AnswerForm(request.POST)
+        if answer_form.is_valid():
+            id = answer_form.save(request.user.profile.id, question_id)
+            answers = pagination(models.Answer.manager.get_by_question(question), page_num)
+
+            return redirect(reverse('question_page',
+                                    kwargs={'question_id':question_id,
+                                            'page_num':answers.paginator.num_pages}) + f'#{id}')
+
     answers_for_page = pagination(models.Answer.manager.get_by_question(question), page_num)
     if answers_for_page == None:
         return HttpResponseNotFound(f"Нет такой страницы")
@@ -99,7 +111,7 @@ def question(request, question_id : int, page_num = 1):
 
     return render(request, 'question.html' , context=context)
 
-
+@login_required
 def ask(request):
     if request.method == 'GET':
         question_form = forms.QuestionForm()
@@ -135,6 +147,10 @@ def signup(request):
     context_for_sidebar(context)
 
     return render(request, "signup.html", context=context)
+
+def logout(request):
+    auth.logout(request)
+    return redirect(request.META.get('HTTP_REFERER'))
 
 def login(request):
     if request.method == 'GET':

@@ -14,9 +14,11 @@
                 <li class="nav-item">
                     <a class="nav-link" href={% url 'hot' %}>Hot</a>
                 </li>
+                {% if user.is_authenticated == True %}
                 <li>
                     <a href={% url 'ask' %}><input class="btn btn-outline-success new-question-btn" type="button" value="Create new"></a>
                 </li>
+                {% endif %}
             </ul>
             <form class="d-flex search" role="search">
                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
@@ -24,9 +26,16 @@
             </form>
         </div>
         {% if user.is_authenticated == True %}
+        <li>
+            <a href={% url 'logout' %}><input class="btn btn-outline-danger" type="button" value="Leave"></a>
+        </li>
         <div class="header-user">
-            <div class="header-user-settings user"><a href="#">stepapopov</a></div>
-            <div class="avatar-header header-user-avatar"><a href="#"><img src="{% static 'img/avatar-1.jpg'%}" alt=""></a></div>
+            <div class="header-user-settings user"><a href="#">{{user.username}}</a></div>
+            <div class="avatar-header header-user-avatar"><a href="#"><img src="{% if user.profile.avatar %}
+                {{user.profile.avatar.url}}
+              {% else %}
+                {% static 'img/avatar-2.jpg' %}
+              {% endif %}" alt=""></a></div>
         </div>
         {% else %}
         <div class="header-enter">
